@@ -8,7 +8,8 @@
 version: v2
 inputs:
   - git_repo: https://github.com/a2aproject/A2A.git
-    ref: main
+    # Update to point to the desired git tag or commit
+    ref: v0.2.6
     subdir: specification/grpc
 
 managed:  

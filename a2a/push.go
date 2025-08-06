@@ -22,18 +22,6 @@ type ListTaskPushConfigParams struct {
 	Metadata map[string]any
 }
 
-// Represents a request for the `tasks/pushNotificationConfig/set` method.
-type SetTaskPushConfigParams struct {
-	// The parameters for setting the push notification configuration.
-	Config TaskPushConfig
-}
-
-// Represents a config update result
-type SetTaskPushConfigResult struct {
-	// The result, containing the configured push notification settings.
-	Config TaskPushConfig
-}
-
 // Defines parameters for deleting a specific push notification configuration for a task.
 type DeleteTaskPushConfigParams struct {
 	// The unique identifier of the task.

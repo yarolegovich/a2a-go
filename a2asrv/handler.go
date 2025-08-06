@@ -22,7 +22,7 @@ type RequestHandler interface {
 
 	OnHandleListTaskPushConfig(ctx context.Context, params a2a.ListTaskPushConfigParams) ([]a2a.TaskPushConfig, error)
 
-	OnHandleSetTaskPushConfig(ctx context.Context, params a2a.SetTaskPushConfigParams) (a2a.SetTaskPushConfigResult, error)
+	OnHandleSetTaskPushConfig(ctx context.Context, params a2a.TaskPushConfig) (a2a.TaskPushConfig, error)
 
 	OnHandleDeleteTaskPushConfig(ctx context.Context, params a2a.DeleteTaskPushConfigParams) error
 }

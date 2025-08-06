@@ -2,6 +2,7 @@ package a2asrv
 
 import (
 	"context"
+	"iter"
 
 	"github.com/a2aproject/a2a-go/a2a"
 )
@@ -13,9 +14,9 @@ type RequestHandler interface {
 
 	OnHandleSendMessage(ctx context.Context, message a2a.MessageSendParams) (a2a.SendMessageResponse, error)
 
-	OnHandleResubscribeToTask(ctx context.Context, id a2a.TaskIDParams) (<-chan a2a.Event, error)
+	OnHandleResubscribeToTask(ctx context.Context, id a2a.TaskIDParams) iter.Seq2[a2a.Event, error]
 
-	OnHandleSendMessageStream(ctx context.Context, message a2a.MessageSendParams) (<-chan a2a.Event, error)
+	OnHandleSendMessageStream(ctx context.Context, message a2a.MessageSendParams) iter.Seq2[a2a.Event, error]
 
 	OnHandleGetTaskPushConfig(ctx context.Context, params a2a.GetTaskPushNotificationConfigParams) (a2a.GetTaskPushNotificationConfigResponse, error)
 

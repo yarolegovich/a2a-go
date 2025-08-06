@@ -1,17 +1,21 @@
 package a2a
 
-import "fmt"
+import "errors"
 
-var ErrTaskNotFound = fmt.Errorf("task not found")
+var (
+	ErrTaskNotFound = errors.New("task not found")
 
-var ErrTaskNotCancelable = fmt.Errorf("task cannot be canceled")
+	ErrTaskNotCancelable = errors.New("task cannot be canceled")
 
-var ErrPushNotificationNotSupported = fmt.Errorf("push notification not supported")
+	ErrPushNotificationNotSupported = errors.New("push notification not supported")
 
-var ErrUnsupportedOperation = fmt.Errorf("this operation is not supported")
+	ErrUnsupportedOperation = errors.New("this operation is not supported")
 
-var ErrUnsupportedContentType = fmt.Errorf("incompatible content types")
+	ErrUnsupportedContentType = errors.New("incompatible content types")
 
-var ErrInvalidAgentResponse = fmt.Errorf("invalid agent response")
+	ErrInvalidAgentResponse = errors.New("invalid agent response")
 
-var ErrInvalidRequest = fmt.Errorf("invalid request")
+	ErrInvalidRequest = errors.New("invalid request")
+
+	ErrAuthenticatedExtendedCardNotConfigured = errors.New("")
+)

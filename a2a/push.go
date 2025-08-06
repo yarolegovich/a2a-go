@@ -49,7 +49,7 @@ type DeleteTaskPushConfigParams struct {
 // A container associating a push notification configuration with a specific task.
 type TaskPushConfig struct {
 	// The push notification configuration for this task.
-	PushConfig PushConfig
+	Config PushConfig
 
 	// The ID of the task.
 	TaskID TaskID

@@ -317,7 +317,7 @@ type MessageSendConfig struct {
 // to create a new task, continue an existing one, or restart a task.
 type MessageSendParams struct {
 	// Optional configuration for the send request.
-	Configuration *MessageSendConfig
+	Config *MessageSendConfig
 
 	// The message object being sent to the agent.
 	Message Message

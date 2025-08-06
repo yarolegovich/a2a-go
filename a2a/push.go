@@ -7,9 +7,6 @@ type GetTaskPushConfigParams struct {
 
 	// The ID of the push notification configuration to retrieve.
 	ConfigID *string
-
-	// Optional metadata associated with the request.
-	Metadata map[string]any
 }
 
 // Defines parameters for listing all push notification configurations associated
@@ -17,18 +14,12 @@ type GetTaskPushConfigParams struct {
 type ListTaskPushConfigParams struct {
 	// The unique identifier of the task.
 	TaskID TaskID
-
-	// Optional metadata associated with the request.
-	Metadata map[string]any
 }
 
 // Defines parameters for deleting a specific push notification configuration for a task.
 type DeleteTaskPushConfigParams struct {
 	// The unique identifier of the task.
 	TaskID TaskID
-
-	// Optional metadata associated with the request.
-	Metadata map[string]any
 
 	// The ID of the push notification configuration to delete.
 	ConfigID string

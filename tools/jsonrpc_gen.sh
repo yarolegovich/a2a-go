@@ -1,4 +1,12 @@
 #!/bin/bash
+# Downloads the published A2A spec and generates go types 
+# in ./internal/jsonrpc/spec.go file.
+# 
+# Ensure $GOBIN is in path and dependencies are installed:
+# > go install github.com/atombender/go-jsonschema@latest
+# 
+# Then run:
+# > ./tools/jsonrpc_gen.sh
 
 set -euo pipefail
 

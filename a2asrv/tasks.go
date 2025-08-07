@@ -5,10 +5,6 @@ import (
 	"github.com/a2aproject/a2a-go/a2a"
 )
 
-type RequestContextBuilder interface {
-	Build(ctx context.Context, p a2a.MessageSendParams, t *a2a.Task) RequestContext
-}
-
 type PushNotifier interface {
 	SendPush(ctx context.Context, task a2a.Task) error
 }

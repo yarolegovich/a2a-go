@@ -1,6 +1,13 @@
 package a2asrv
 
-import "github.com/a2aproject/a2a-go/a2a"
+import (
+	"context"
+	"github.com/a2aproject/a2a-go/a2a"
+)
+
+type RequestContextBuilder interface {
+	Build(ctx context.Context, p a2a.MessageSendParams, t *a2a.Task) RequestContext
+}
 
 type RequestContext struct {
 	Request      a2a.MessageSendParams

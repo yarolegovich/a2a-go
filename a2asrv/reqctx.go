@@ -11,6 +11,7 @@ type RequestContextBuilder interface {
 
 type RequestContext struct {
 	Request      a2a.MessageSendParams
+	TaskID       a2a.TaskID
 	Task         *a2a.Task
 	RelatedTasks []a2a.Task
 	ContextID    string

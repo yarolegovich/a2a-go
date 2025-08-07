@@ -20,17 +20,17 @@ import (
 	"github.com/a2aproject/a2a-go/a2a"
 )
 
-type EventWriter interface {
-	Write(ctx context.Context, event a2a.Event) error
-}
-
 type EventReader interface {
 	Read(ctx context.Context) (a2a.Event, error)
 }
 
+type EventWriter interface {
+	Write(ctx context.Context, event a2a.Event) error
+}
+
 type EventQueue interface {
-	EventWriter
 	EventReader
+	EventWriter
 
 	Close()
 }

@@ -17,5 +17,5 @@ var (
 
 	ErrInvalidRequest = errors.New("invalid request")
 
-	ErrAuthenticatedExtendedCardNotConfigured = errors.New("")
+	ErrAuthenticatedExtendedCardNotConfigured = errors.New("extended card not configured")
 )

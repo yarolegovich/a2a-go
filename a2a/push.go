@@ -23,8 +23,7 @@ type GetTaskPushConfigParams struct {
 	ConfigID *string
 }
 
-// Defines parameters for listing all push notification configurations associated
-// with a task.
+// Defines parameters for listing all push notification configurations associated with a task.
 type ListTaskPushConfigParams struct {
 	// The unique identifier of the task.
 	TaskID TaskID

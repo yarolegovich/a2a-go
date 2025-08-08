@@ -20,12 +20,36 @@ import (
 	"github.com/a2aproject/a2a-go/a2a"
 )
 
+// AgentExecutor implementations translate agent outputs to A2A events.
 type AgentExecutor interface {
-	Execute(ctx context.Context, reqCtx RequestContext, queue EventQueue) error
+	// Execute invokes an agent with the provided context and translates agent outputs
+	// into A2A events writing them to the provided event queue.
+	//
+	// Returns an error if agent invocation failed.
+	Execute(ctx context.Context, reqCtx RequestContext, queue EventWriter) error
 
-	Cancel(ctx context.Context, reqCtx RequestContext, queue EventQueue) error
+	// Cancel requests the agent to stop processing an ongoing task.
+	//
+	// The agent should attempt to gracefully stop the task identified by the
+	// task ID in the request context and publish a TaskStatusUpdateEvent with
+	// state TaskStateCanceled to the event queue.
+	//
+	// Returns an error if the cancellation request cannot be processed.
+	Cancel(ctx context.Context, reqCtx RequestContext, queue EventWriter) error
 }
 
+// AgentCardProducer creates an AgentCard instances used for agent discovery and capability negotiation.
 type AgentCardProducer interface {
+	// Card returns a self-describing manifest for an agent. It provides essential
+	// metadata including the agent's identity, capabilities, skills, supported
+	// communication methods, and security requirements and is publicly available.
 	Card() a2a.AgentCard
+}
+
+// ExtendedAgentCardProducer can create both public agent cards and cards available to authenticated users only.
+type ExtendedAgentCardProducer interface {
+	AgentCardProducer
+
+	// ExtendedCard returns a manifest for an agent which is only available to authenticated users.
+	ExtendedCard() a2a.AgentCard
 }

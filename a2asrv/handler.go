@@ -21,7 +21,7 @@ import (
 	"github.com/a2aproject/a2a-go/a2a"
 )
 
-type Requestr interface {
+type RequestHandler interface {
 	OnGetTask(ctx context.Context, query a2a.TaskQueryParams) (a2a.Task, error)
 
 	OnCancelTask(ctx context.Context, id a2a.TaskIDParams) (a2a.Task, error)

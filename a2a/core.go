@@ -279,7 +279,7 @@ type FileWithBytes struct {
 // Represents a file with its content located at a specific URI.
 type FileWithUri struct {
 	// The MIME type of the file (e.g., "application/pdf").
-	MimeType *string
+	MimesType *string
 
 	// An optional name for the file (e.g., "document.pdf").
 	Name *string

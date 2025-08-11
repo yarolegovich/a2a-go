@@ -12,6 +12,4 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package a2apb contains types and interfaces generated from published
-// official A2A .proto specification.
 package a2apb

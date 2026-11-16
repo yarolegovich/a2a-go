@@ -1,0 +1,53 @@
+name: Stress
+
+on:
+  push:
+    branches: [stress/**]
+  workflow_dispatch:
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+    - name: Setup
+      uses: ./.github/actions/setup
+
+    - name: Widen ephemeral port range
+      run: sudo sysctl -w net.ipv4.ip_local_port_range="1024 65535"
+
+    - name: Race Detector
+      continue-on-error: true
+      run: |
+        set -o pipefail
+        go test -race -mod=readonly -v -count=3 -shuffle=on -timeout=20m ./... 2>&1 | tee race.log
+
+    - name: Test Loop
+      continue-on-error: true
+      run: |
+        set -o pipefail
+        go test -mod=readonly -v -count=100 -shuffle=on -timeout=30m ./... 2>&1 | tee loop.log
+
+    - name: Report failures
+      run: |
+        failed=0
+        for f in race.log loop.log; do
+          if grep -qE -- '^--- FAIL|^FAIL|^panic:|WARNING: DATA RACE|test timed out' "$f"; then
+            failed=1
+            echo "## $f" >> "$GITHUB_STEP_SUMMARY"
+            grep -E -- '--- FAIL|^FAIL|^panic:|WARNING: DATA RACE|test timed out|_test\.go:[0-9]+:' "$f" | sort | uniq -c | sort -rn | head -50 | sed 's/^/    /' >> "$GITHUB_STEP_SUMMARY"
+          fi
+        done
+        exit $failed
+
+    - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      if: always()
+      with:
+        name: logs-${{ matrix.shard }}
+        path: '*.log'
+        retention-days: 7
